@@ -1,0 +1,43 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  font-size: 14px;
+}
+.v0_849 {
+  width: 100%;
+  height: 600px;
+  background: rgba(255,255,255,1);
+  opacity: 1;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  overflow: hidden;
+}
+.name {
+  color: #fff;
+}
+.v0_851 {
+  width: 686px;
+  color: rgba(0,0,0,1);
+  position: absolute;
+  top: 225px;
+  left: 914px;
+  font-family: Montserrat;
+  font-weight: Bold;
+  font-size: 24px;
+  opacity: 1;
+  text-align: left;
+}
+.v0_852 {
+  width: 686px;
+  color: rgba(0,0,0,0.800000011920929);
+  position: absolute;
+  top: 285px;
+  left: 914px;
+  font-family: Montserrat;
+  font-weight: Regular;
+  font-size: 18px;
+  opacity: 1;
+  text-align: left;
+}

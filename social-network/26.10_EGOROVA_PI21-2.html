@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Книжный магазин</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .book-card:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s;
+        }
+        .custom-button {
+            background-color: white;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Книжный магазин</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Главная <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Каталог</a>
+                </li>
+            </ul>
+            <div class="navbar-text ml-auto">
+                В корзине: <span id="cartCount">0</span> товаров
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div id="carouselExample" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExample" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExample" data-slide-to="1"></li>
+                <li data-target="#carouselExample" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="d-flex justify-content-center">
+                        <div class="p-2">
+                            <img src="книга1.jpg" alt="Книга 1" style="width: 250px; height: 350px;" data-toggle="modal" data-target="#bookModal">
+                        </div>
+                        <div class="p-2">
+                            <img src="книга2.jpg" alt="Книга 2" style="width: 250px; height: 350px;" data-toggle="modal" data-target="#bookModal">
+                        </div>
+                        <div class="p-2">
+                            <img src="книга3.jpg" alt="Книга 3" style="width: 250px; height: 350px;" data-toggle="modal" data-target="#bookModal">
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="d-flex justify-content-center">
+                        <div class="p-2">
+                            <img src="книга4.jpg" alt="Книга 4" style="width: 250px; height: 350px;" data-toggle="modal" data-target="#bookModal">
+                        </div>
+                        <div class="p-2">
+                            <img src="книга5.jpg" alt="Книга 5" style="width: 250px; height: 350px;" data-toggle="modal" data-target="#bookModal">
+                        </div>
+                        <div class="p-2">
+                            <img src="книга6.jpg" alt="Книга 6" style="width: 250px; height: 350px;" data-toggle="modal" data-target="#bookModal">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExample" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+
+        <div id="root"></div>
+
+        <div class="modal fade" id="bookModal" tabindex="-1" role="dialog" aria-labelledby="bookModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="bookModalLabel">Книга</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true"></span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="bookModalContent">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/react@16.14.0/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@16.14.0/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
+
+    <script type="text/babel">
+      function Card({ children }) {
+        return (
+          <div className="card book-card">
+            {children}
+          </div>
+        );
+      }
+
+
+        class Book extends React.Component {
+          render() {
+            const { title = "Без названия", author = "Автор неизвестен", price = 100, imageSrc } = this.props;
+
+            const cardStyle = {
+              width: '250px',
+              height: '350px',
+            };
+
+            const imageStyle = {
+              height: '100%',
+            };
+
+            const handleBookDetailsClick = () => {
+              const bookDetails = `Название: ${title}\nАвтор: ${author}\nЦена: $${price}`;
+              document.getElementById("bookModalContent").textContent = bookDetails;
+            };
+
+            const handleAddToCartClick = () => {
+              const cartCountElement = document.getElementById("cartCount");
+              cartCount++;
+              cartCountElement.textContent = cartCount;
+            };
+
+            return (
+              <Card>
+                <div className="card-body text-center" style={cardStyle}>
+                  <img src={imageSrc} alt={title} style={imageStyle} />
+                  <h5 className="card-title">{title}</h5>
+                  <h6 className="card-subtitle mb-2 text-muted">{author}</h6>
+                  <p className="card-text">Цена: {price} рублей</p>
+                  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px' }}>
+                    <button type="button" className="btn btn-primary custom-button" onClick={handleBookDetailsClick} data-toggle="modal" data-target="#bookModal">
+                      Подробнее
+                    </button>
+                    <button type="button" className="btn btn-success custom-button" onClick={handleAddToCartClick}>
+                      Корзина
+                    </button>
+                  </div>
+                </div>
+              </Card>
+            );
+          }
+        }
+
+
+    class BookList extends React.Component {
+        render() {
+            const { title, books = [] } = this.props;
+            return (
+                <div className="text-center">
+                    <h1 className="my-4">{title}</h1>
+                    <div className="card-deck">
+                        {books.map((book, index) => (
+                            <Book key={index} {...book} />
+                        ))}
+                    </div>
+                </div>
+            );
+        }
+    }
+
+        const topSales = [
+            { title: "Книга Ночи", author: "Холли Блэк", price: 25, imageSrc: "книга1.jpg" },
+            { title: "Дом на краю ночи", author: "Кэтрин Беннер", price: 30, imageSrc: "книга2.jpg" },
+            { title: "в метре друг от друга", author: "Автор 3", imageSrc: "книга10.jpg" },
+            { title: "Книга мудрости", imageSrc: "книга4.jpg" },
+        ];
+
+        const newReleases = [
+            { title: "Лавр", author: "Евгений Водолазкин", price: 35, imageSrc: "книга5.jpg" },
+            { title: "Зверский детектив", author: "Анна Старобинец", price: 40, imageSrc: "книга6.jpg" },
+            { title: "Хороший хирург", author: "Автор 6", imageSrc: "книга7.jpg" },
+            { title: "Рассказы", author: "Василий Пупкин", imageSrc: "книга8.jpg" },
+        ];
+
+
+        let cartCount = 0;
+
+          ReactDOM.render(
+            <div>
+              <div id="topSales">
+                <BookList title="Топ продаж" books={topSales} />
+              </div>
+              <div id="spaceBetweenSections" style={{ height: '200px' }}></div>
+              <div id="newReleases">
+                <BookList title="Новинки" books={newReleases} />
+              </div>
+              <div id="spaceBetweenSections" style={{ height: '200px' }}></div>
+            </div>,
+            document.getElementById("root")
+          );
+
+
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

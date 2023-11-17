@@ -1,0 +1,80 @@
+/* App.css */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+nav {
+  display: flex;
+}
+
+.nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+
+.nav-list li {
+  margin-right: 20px;
+}
+
+.main-content {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.blocks {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.block {
+  width: 30%;
+  padding: 20px;
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+}
+
+.block img {
+  max-width: 100%;
+  height: auto;
+}
+
+.block p {
+  margin-top: 10px;
+}
+
+.block button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+/* Медиа-запрос для мобильных устройств */
+@media (max-width: 768px) {
+  .blocks {
+    flex-direction: column;
+  }
+
+  .block {
+    width: 100%;
+  }
+}
